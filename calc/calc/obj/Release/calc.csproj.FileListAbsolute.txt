@@ -1,0 +1,9 @@
+D:\Projects\calc\calc\bin\Release\calc.exe.config
+D:\Projects\calc\calc\bin\Release\calc.exe
+D:\Projects\calc\calc\bin\Release\calc.pdb
+D:\Projects\calc\calc\obj\Release\calc.csprojResolveAssemblyReference.cache
+D:\Projects\calc\calc\obj\Release\calc.Form1.resources
+D:\Projects\calc\calc\obj\Release\calc.Properties.Resources.resources
+D:\Projects\calc\calc\obj\Release\calc.csproj.GenerateResource.Cache
+D:\Projects\calc\calc\obj\Release\calc.exe
+D:\Projects\calc\calc\obj\Release\calc.pdb
