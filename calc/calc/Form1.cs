@@ -150,12 +150,8 @@ namespace calc
                     
 
                 }
-            
+            displayResult();
 
-            string resultInField = Convert.ToString(result);
-            textField.Text = resultInField;
-            resetAll();
-            changeImage();
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
@@ -269,5 +265,58 @@ namespace calc
             picImage.ImageLocation = "https://stickershop.line-scdn.net/stickershop/v1/sticker/5715055/ANDROID/sticker.png";
             picImage.Update();
         }
+
+        private void simpleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            simpleToolStripMenuItem.Checked = true;
+            advancedToolStripMenuItem.Checked = false;
+            checkType();
+        }
+
+        private void advancedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            simpleToolStripMenuItem.Checked = false;
+            advancedToolStripMenuItem.Checked = true;
+            checkType();
+        }
+
+        private void checkType()
+        {
+            if (advancedToolStripMenuItem.Checked == true)
+            {
+                sqrtButton.Visible = true;
+            }
+
+            if (simpleToolStripMenuItem.Checked == true)
+            {
+                sqrtButton.Visible = false;
+            }
+
+
+        }
+
+        private void sqrtButton_Click(object sender, EventArgs e)
+        {
+           
+
+            if (textField.Text != "")
+            {
+                firstElement = Convert.ToDecimal(textField.Text);
+                double doubleElement = (double)firstElement;
+                textField.Text = "";
+                result = (decimal)Math.Sqrt(doubleElement);
+                displayResult();
+            }
+        }
+
+        private void displayResult()
+        {
+
+            string resultInField = Convert.ToString(result);
+            textField.Text = resultInField;
+            resetAll();
+            changeImage();
+        }
     }
-}
+    }
+

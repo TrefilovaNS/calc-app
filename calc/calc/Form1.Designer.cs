@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.textField = new System.Windows.Forms.TextBox();
             this.btnCalc = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
@@ -55,6 +54,7 @@
             this.simpleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.advancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.sqrtButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -306,21 +306,38 @@
             // 
             // simpleToolStripMenuItem
             // 
+            this.simpleToolStripMenuItem.Checked = true;
+            this.simpleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.simpleToolStripMenuItem.Name = "simpleToolStripMenuItem";
-            this.simpleToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.simpleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.simpleToolStripMenuItem.Text = "Simple";
+            this.simpleToolStripMenuItem.Click += new System.EventHandler(this.simpleToolStripMenuItem_Click);
             // 
             // advancedToolStripMenuItem
             // 
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
-            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.advancedToolStripMenuItem.Text = "Advanced";
+            this.advancedToolStripMenuItem.Click += new System.EventHandler(this.advancedToolStripMenuItem_Click);
+            // 
+            // sqrtButton
+            // 
+            this.sqrtButton.Location = new System.Drawing.Point(300, 316);
+            this.sqrtButton.Margin = new System.Windows.Forms.Padding(2);
+            this.sqrtButton.Name = "sqrtButton";
+            this.sqrtButton.Size = new System.Drawing.Size(45, 39);
+            this.sqrtButton.TabIndex = 20;
+            this.sqrtButton.Text = "√";
+            this.sqrtButton.UseVisualStyleBackColor = true;
+            this.sqrtButton.Visible = false;
+            this.sqrtButton.Click += new System.EventHandler(this.sqrtButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 431);
+            this.Controls.Add(this.sqrtButton);
             this.Controls.Add(this.picImage);
             this.Controls.Add(this.btnDot);
             this.Controls.Add(this.btnReset);
@@ -341,7 +358,6 @@
             this.Controls.Add(this.btnCalc);
             this.Controls.Add(this.textField);
             this.Controls.Add(this.menuStrip1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -383,6 +399,7 @@
         private System.Windows.Forms.ToolStripMenuItem simpleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem advancedToolStripMenuItem;
         private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.Button sqrtButton;
     }
 }
 
