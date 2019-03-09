@@ -55,6 +55,8 @@
             this.advancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.sqrtButton = new System.Windows.Forms.Button();
+            this.leftBracketButton = new System.Windows.Forms.Button();
+            this.rightBracketButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -263,7 +265,7 @@
     "png";
             this.picImage.Location = new System.Drawing.Point(46, 263);
             this.picImage.Name = "picImage";
-            this.picImage.Size = new System.Drawing.Size(228, 156);
+            this.picImage.Size = new System.Drawing.Size(228, 217);
             this.picImage.TabIndex = 18;
             this.picImage.TabStop = false;
             this.picImage.Click += new System.EventHandler(this.picImage_Click);
@@ -309,14 +311,14 @@
             this.simpleToolStripMenuItem.Checked = true;
             this.simpleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.simpleToolStripMenuItem.Name = "simpleToolStripMenuItem";
-            this.simpleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.simpleToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.simpleToolStripMenuItem.Text = "Simple";
             this.simpleToolStripMenuItem.Click += new System.EventHandler(this.simpleToolStripMenuItem_Click);
             // 
             // advancedToolStripMenuItem
             // 
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
-            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.advancedToolStripMenuItem.Text = "Advanced";
             this.advancedToolStripMenuItem.Click += new System.EventHandler(this.advancedToolStripMenuItem_Click);
             // 
@@ -332,11 +334,35 @@
             this.sqrtButton.Visible = false;
             this.sqrtButton.Click += new System.EventHandler(this.sqrtButton_Click);
             // 
+            // leftBracketButton
+            // 
+            this.leftBracketButton.Location = new System.Drawing.Point(301, 369);
+            this.leftBracketButton.Margin = new System.Windows.Forms.Padding(2);
+            this.leftBracketButton.Name = "leftBracketButton";
+            this.leftBracketButton.Size = new System.Drawing.Size(45, 39);
+            this.leftBracketButton.TabIndex = 21;
+            this.leftBracketButton.Text = "(";
+            this.leftBracketButton.UseVisualStyleBackColor = true;
+            this.leftBracketButton.Visible = false;
+            // 
+            // rightBracketButton
+            // 
+            this.rightBracketButton.Location = new System.Drawing.Point(301, 422);
+            this.rightBracketButton.Margin = new System.Windows.Forms.Padding(2);
+            this.rightBracketButton.Name = "rightBracketButton";
+            this.rightBracketButton.Size = new System.Drawing.Size(45, 39);
+            this.rightBracketButton.TabIndex = 22;
+            this.rightBracketButton.Text = ")";
+            this.rightBracketButton.UseVisualStyleBackColor = true;
+            this.rightBracketButton.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 431);
+            this.ClientSize = new System.Drawing.Size(406, 492);
+            this.Controls.Add(this.rightBracketButton);
+            this.Controls.Add(this.leftBracketButton);
             this.Controls.Add(this.sqrtButton);
             this.Controls.Add(this.picImage);
             this.Controls.Add(this.btnDot);
@@ -400,6 +426,8 @@
         private System.Windows.Forms.ToolStripMenuItem advancedToolStripMenuItem;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.Button sqrtButton;
+        private System.Windows.Forms.Button leftBracketButton;
+        private System.Windows.Forms.Button rightBracketButton;
     }
 }
 

@@ -284,12 +284,13 @@ namespace calc
         {
             if (advancedToolStripMenuItem.Checked == true)
             {
-                sqrtButton.Visible = true;
-            }
+                    makeVisibleAdvanvedButtons();
+
+               }
 
             if (simpleToolStripMenuItem.Checked == true)
             {
-                sqrtButton.Visible = false;
+                    makeUnvisibleAdvancedButtons();
             }
 
 
@@ -316,6 +317,20 @@ namespace calc
             textField.Text = resultInField;
             resetAll();
             changeImage();
+        }
+
+        private void makeVisibleAdvanvedButtons()
+        {
+                sqrtButton.Visible = true;
+                leftBracketButton.Visible = true;
+                rightBracketButton.Visible = true;            
+        }
+
+        private void makeUnvisibleAdvancedButtons()
+        {
+                sqrtButton.Visible = false;
+                leftBracketButton.Visible = false;
+                rightBracketButton.Visible = false;
         }
     }
     }
