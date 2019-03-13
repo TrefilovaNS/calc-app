@@ -13,6 +13,8 @@ namespace calc
     public partial class Form1 : Form
     {
 
+        bool advancedCalc = false;
+
         decimal firstElement = 0;
         decimal secondElement = 0;
         
@@ -21,6 +23,7 @@ namespace calc
         bool minusOperationType = false;
         bool multipleOperationType = false;
         bool divideOperationType = false;
+
 
         
 
@@ -92,66 +95,128 @@ namespace calc
         private void btnPlus_Click(object sender, EventArgs e)
         {
 
-            
-            minusOperationType = false;
-            multipleOperationType = false;
-            divideOperationType = false;
-
-            if (textField.Text != "")
+            if (advancedCalc == false)
             {
-                firstElement = Convert.ToDecimal(textField.Text);
-                textField.Text = "";
-                plusOperationType = true;
-                
+                minusOperationType = false;
+                multipleOperationType = false;
+                divideOperationType = false;
+
+                if (textField.Text != "")
+                {
+                    firstElement = Convert.ToDecimal(textField.Text);
+                    textField.Text = "";
+                    plusOperationType = true;
+
+                }
             }
+            else {
+                textField.AppendText(" + ");
+
+            }
+            
             
         }
 
         private void btnCalc_Click(object sender, EventArgs e)
         {
-
-            if (textField.Text != "")
+            if (advancedCalc == false)
             {
-                secondElement = Convert.ToDecimal(textField.Text);
-                textField.Text = "";
-            }
-            
-          
-           
+                if (textField.Text != "")
+                {
+                    secondElement = Convert.ToDecimal(textField.Text);
+                    textField.Text = "";
+                }
+
+
+
                 if (plusOperationType == true)
 
-                    
-                        result = firstElement + secondElement;
-                    
+
+                    result = firstElement + secondElement;
+
 
                 if (minusOperationType == true)
                 {
-                    
-                   
-                        result = firstElement - secondElement;
-                  
+
+
+                    result = firstElement - secondElement;
+
 
                 }
 
                 if (multipleOperationType == true)
                 {
-                    
-                  
-                    
-                        result = firstElement * secondElement;
-                    
+
+
+
+                    result = firstElement * secondElement;
+
 
                 }
                 if (divideOperationType == true)
                 {
-                    
-                    
-                        result = (decimal)firstElement / (decimal)secondElement;
-                    
+
+
+                    result = (decimal)firstElement / (decimal)secondElement;
+
 
                 }
-            displayResult();
+                displayResult();
+            }
+            else
+            {
+                var textFromField = textField.Text;
+                var textFieldArray = textFromField.Split(' ');
 
+                int digitsCounter = 0;
+                int charsCounter = 0;
+
+                foreach (string text in textFieldArray)
+                {
+
+                    if ((text == "+") || (text == "-") || (text == "*") || (text == "/"))
+                    {
+                        charsCounter++;
+                    }
+                    else
+                    {
+                        digitsCounter++;
+
+                    }
+
+                }
+
+                decimal[] digits = new decimal[digitsCounter];
+                int indexDigits = 0;
+                char[] operations = new char[charsCounter];
+                int indexChar = 0;
+
+
+
+                foreach (string text in textFieldArray)
+                {
+
+
+                    if ((text == "+") || (text == "-") || (text == "*") || (text == "/"))
+                    {
+                        operations[indexChar] = Convert.ToChar(text);
+                        indexChar++;
+                    }
+                    else
+                    {
+                        digits[indexDigits] = Convert.ToDecimal(text);
+                        indexDigits++;
+
+                    }
+
+                  
+
+                    
+                }
+                //string resultInField = String.Join("", operations);
+                //textField.Text = resultInField;
+
+            }
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
@@ -285,12 +350,14 @@ namespace calc
             if (advancedToolStripMenuItem.Checked == true)
             {
                     makeVisibleAdvanvedButtons();
+                    advancedCalc = true;
 
                }
 
             if (simpleToolStripMenuItem.Checked == true)
             {
                     makeUnvisibleAdvancedButtons();
+                    advancedCalc = false;
             }
 
 
@@ -332,6 +399,8 @@ namespace calc
                 leftBracketButton.Visible = false;
                 rightBracketButton.Visible = false;
         }
+
+    
     }
     }
 
