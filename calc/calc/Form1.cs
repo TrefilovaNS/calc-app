@@ -214,29 +214,37 @@ namespace calc
 
                 }
 
+                //Check for high priority operations
+                bool highPriorityOperations = false;
+                foreach (char operation in operations)
+                {
+                    if(operation == '*' || operation == '/')
+                    {
+                        highPriorityOperations = true;
+                        break;
+                    }
+                }
+
                 //Perform calculation
                 decimal firstItem, secondItem;                
                 firstItem = digits[0];
                 int m = 1;
 
-                if (digits.Length > 0 && operations.Length > 0)
+                if (highPriorityOperations == false && (digits.Length > 0 && operations.Length > 0))
                 {
                     foreach(char operation in operations)
                     {
                         if (operation == '+')
                         {
                             secondItem = digits[m];
-                            firstItem = firstItem + secondItem;                            
+                            firstItem = firstItem + secondItem;
                             m++;
-                        }else if (operation == '-')
+                        }
+                        else if (operation == '-')
                         {
-
-                        }else if (operation == '*')
-                        {
-
-                        }else if (operation == '/')
-                        {
-
+                            secondItem = digits[m];
+                            firstItem = firstItem - secondItem;
+                            m++;
                         }
                     }
                 }
@@ -251,17 +259,25 @@ namespace calc
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
-        {
-            
-            plusOperationType = false;
-            multipleOperationType = false;
-            divideOperationType = false;
-
-            if (textField.Text != "")
+        {      
+           
+            if(advancedCalc == false)
             {
-                firstElement = Convert.ToDecimal(textField.Text);
-                textField.Text = "";
-                minusOperationType = true;
+                plusOperationType = false;
+                multipleOperationType = false;
+                divideOperationType = false;
+
+                if (textField.Text != "")
+                {
+                    firstElement = Convert.ToDecimal(textField.Text);
+                    textField.Text = "";
+                    minusOperationType = true;
+
+                }
+
+            }
+            else {
+                textField.AppendText(" - ");
 
             }
         }
