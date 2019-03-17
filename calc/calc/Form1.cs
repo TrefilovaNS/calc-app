@@ -190,71 +190,102 @@ namespace calc
 
                 }
 
-                decimal[] digits = new decimal[digitsCounter];
-                int indexDigits = 0;
-                char[] operations = new char[charsCounter];
-                int indexChar = 0;
-
-
-
-                foreach (string text in textFieldArray)
-                {
-
-                    if ((text == "+") || (text == "-") || (text == "*") || (text == "/"))
-                    {
-                        operations[indexChar] = Convert.ToChar(text);
-                        indexChar++;
-                    }
-                    else
-                    {
-                        digits[indexDigits] = Convert.ToDecimal(text);
-                        indexDigits++;
-
-                    }
-
-                }
-
                 //Check for high priority operations
                 bool highPriorityOperations = false;
-                foreach (char operation in operations)
+                foreach (string text in textFieldArray)
                 {
-                    if(operation == '*' || operation == '/')
+                    if (text == "*" || text == "/")
                     {
                         highPriorityOperations = true;
                         break;
                     }
                 }
 
-                //Perform calculation
-                decimal firstItem, secondItem;                
-                firstItem = digits[0];
-                int m = 1;
+                decimal[] digits = new decimal[digitsCounter];
+                int indexDigits = 0;
+                char[] operations = new char[charsCounter];
+                int indexChar = 0;
 
-                if (highPriorityOperations == false && (digits.Length > 0 && operations.Length > 0))
+                if (highPriorityOperations == false)
                 {
-                    foreach(char operation in operations)
+                    foreach (string text in textFieldArray)
                     {
-                        if (operation == '+')
+
+                        if ((text == "+") || (text == "-") || (text == "*") || (text == "/"))
                         {
-                            secondItem = digits[m];
-                            firstItem = firstItem + secondItem;
-                            m++;
+                            operations[indexChar] = Convert.ToChar(text);
+                            indexChar++;
                         }
-                        else if (operation == '-')
+                        else
                         {
-                            secondItem = digits[m];
-                            firstItem = firstItem - secondItem;
-                            m++;
+                            digits[indexDigits] = Convert.ToDecimal(text);
+                            indexDigits++;
+
+                        }
+
+                    }
+                }
+                else
+                {
+                    decimal leftSideItem, rightSideItem;
+                    int operationIndex;
+                    foreach (string text in textFieldArray)
+                    {
+                        if (text == "*")
+                        {
+                            operationIndex = Array.FindIndex(textFieldArray, row => row.Contains("*"));
+
+                            leftSideItem = Convert.ToDecimal(textFieldArray[operationIndex - 1]);
+                            rightSideItem = Convert.ToDecimal(textFieldArray[operationIndex + 1]);
+
+                            digits[indexDigits] = leftSideItem;
+                            digits[indexDigits + 1] = rightSideItem;
+                            indexDigits += 2;
+
+                            operations[indexChar] = '*';
                         }
                     }
                 }
+                             
+                                
+                //Perform non-high priority calculation
+                if (highPriorityOperations == false)
+                {
+                    decimal firstItem, secondItem;
+                    firstItem = digits[0];
+                    int m = 1;
 
-                result = firstItem;
-                displayResult();
+                    if (highPriorityOperations == false && (digits.Length > 0 && operations.Length > 0))
+                    {
+                        foreach (char operation in operations)
+                        {
+                            if (operation == '+')
+                            {
+                                secondItem = digits[m];
+                                firstItem = firstItem + secondItem;
+                                m++;
+                            }
+                            else if (operation == '-')
+                            {
+                                secondItem = digits[m];
+                                firstItem = firstItem - secondItem;
+                                m++;
+                            }
+                            else if (operation == '*')
+                            {
+                                secondItem = digits[m];
+                                firstItem = firstItem - secondItem;
+                                m++;
+                            }
+                        }
+                    }
 
-                //string resultInField = String.Join("", operations);
-                //textField.Text = resultInField;
+                    result = firstItem;
+                    displayResult();
+                }
+                
 
+                
             }
         }
 
@@ -284,33 +315,48 @@ namespace calc
 
         private void btnMultiple_Click(object sender, EventArgs e)
         {
-
-            minusOperationType = false;
-            plusOperationType = false;
-            divideOperationType = false;
-
-            if (textField.Text != "")
+            if (advancedCalc == false)
             {
-                firstElement = Convert.ToDecimal(textField.Text);
-                textField.Text = "";
-                multipleOperationType = true;
+                minusOperationType = false;
+                plusOperationType = false;
+                divideOperationType = false;
 
+                if (textField.Text != "")
+                {
+                    firstElement = Convert.ToDecimal(textField.Text);
+                    textField.Text = "";
+                    multipleOperationType = true;
+
+                }
             }
+            else
+            {
+                textField.AppendText(" * ");
+            }
+           
         }
 
         private void btnDivide_Click(object sender, EventArgs e)
         {
-            minusOperationType = false;
-            plusOperationType = false;
-            multipleOperationType = false;           
-
-            if (textField.Text != "")
+            if (advancedCalc == false)
             {
-                firstElement = Convert.ToDecimal(textField.Text);
-                textField.Text = "";
-                divideOperationType = true;
+                minusOperationType = false;
+                plusOperationType = false;
+                multipleOperationType = false;
 
+                if (textField.Text != "")
+                {
+                    firstElement = Convert.ToDecimal(textField.Text);
+                    textField.Text = "";
+                    divideOperationType = true;
+
+                }
             }
+            else
+            {
+                textField.AppendText(" / ");
+            }
+            
         }
 
         private void btnReset_Click(object sender, EventArgs e)
