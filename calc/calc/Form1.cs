@@ -36,7 +36,11 @@ namespace calc
 
         private void textField_TextChanged(object sender, EventArgs e)
         {
-            CheckZero();
+            if (advancedCalc == false)
+            {
+                CheckZero();
+            }
+            
         }
 
        
@@ -196,7 +200,6 @@ namespace calc
                 foreach (string text in textFieldArray)
                 {
 
-
                     if ((text == "+") || (text == "-") || (text == "*") || (text == "/"))
                     {
                         operations[indexChar] = Convert.ToChar(text);
@@ -209,10 +212,38 @@ namespace calc
 
                     }
 
-                  
-
-                    
                 }
+
+                //Perform calculation
+                decimal firstItem, secondItem;                
+                firstItem = digits[0];
+                int m = 1;
+
+                if (digits.Length > 0 && operations.Length > 0)
+                {
+                    foreach(char operation in operations)
+                    {
+                        if (operation == '+')
+                        {
+                            secondItem = digits[m];
+                            firstItem = firstItem + secondItem;                            
+                            m++;
+                        }else if (operation == '-')
+                        {
+
+                        }else if (operation == '*')
+                        {
+
+                        }else if (operation == '/')
+                        {
+
+                        }
+                    }
+                }
+
+                result = firstItem;
+                displayResult();
+
                 //string resultInField = String.Join("", operations);
                 //textField.Text = resultInField;
 
@@ -283,6 +314,7 @@ namespace calc
 
         private void CheckZero()
         {
+
             if (textField.Text.Contains(",") == false)
             {
                 if (textField.Text.Length >= 2 && textField.Text.IndexOf("0") == 0)
