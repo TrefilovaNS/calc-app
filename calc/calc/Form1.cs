@@ -227,35 +227,94 @@ namespace calc
                 }
                 else
                 {
+                    //Check for several high pri operations
+                    bool startWithMultiple = false;
+                    bool startWithDivide = false;
+
+                    if (Array.FindIndex(textFieldArray, row => row.Contains("*")) != -1 && Array.FindIndex(textFieldArray, row => row.Contains("/")) != -1)
+                    {
+                        if (Array.FindIndex(textFieldArray, row => row.Contains("*")) > Array.FindIndex(textFieldArray, row => row.Contains("/")))
+                        {
+                            startWithMultiple = true;
+                        }
+                        else
+                        {
+                            startWithDivide = true;
+                        }
+                    }
+
                     decimal leftSideItem, rightSideItem;
                     int operationIndex;
                     foreach (string text in textFieldArray)
                     {
-                        if (text == "*")
+                        if (startWithMultiple == true)
                         {
-                            operationIndex = Array.FindIndex(textFieldArray, row => row.Contains("*"));
+                            if (text == "*")
+                            {
+                                setUpOperationWithTwoElements("*");
+                            }else if (text == "/")
+                            {
+                                setUpOperationWithTwoElements("/");
+                            }else if (text == "+")
+                            {
+                                setUpOperationWithTwoElements("+");
+                            }else if (text == "-")
+                            {
+                                setUpOperationWithTwoElements("-");
+                            }
+                            
+                        }else if (startWithDivide == true)
+                        {
+                            if (text == "/")
+                            {
+                                setUpOperationWithTwoElements("/");
+                            }
+                            else if (text == "*")
+                            {
+                                setUpOperationWithTwoElements("*");
+                            }
 
-                            leftSideItem = Convert.ToDecimal(textFieldArray[operationIndex - 1]);
-                            rightSideItem = Convert.ToDecimal(textFieldArray[operationIndex + 1]);
-
-                            digits[indexDigits] = leftSideItem;
-                            digits[indexDigits + 1] = rightSideItem;
-                            indexDigits += 2;
-
-                            operations[indexChar] = '*';
+                        }else if (startWithDivide == false && startWithMultiple == false)
+                        {
+                            if (text == "*")
+                            {
+                                setUpOperationWithTwoElements("*");
+                            }
+                            if (text == "/")
+                            {
+                                setUpOperationWithTwoElements("/");
+                            }
                         }
+
+                        
                     }
+
+                    void setUpOperationWithTwoElements(string value)
+                    {
+                        operationIndex = Array.FindIndex(textFieldArray, row => row.Contains(value));
+
+                        leftSideItem = Convert.ToDecimal(textFieldArray[operationIndex - 1]);
+                        rightSideItem = Convert.ToDecimal(textFieldArray[operationIndex + 1]);
+
+                        digits[indexDigits] = leftSideItem;
+                        digits[indexDigits + 1] = rightSideItem;
+                        indexDigits += 2;
+
+                        operations[indexChar] = Convert.ToChar(value);
+                    }
+
+
                 }
-                             
+                 
+                
                                 
                 //Perform non-high priority calculation
-                if (highPriorityOperations == false)
-                {
+                
                     decimal firstItem, secondItem;
                     firstItem = digits[0];
                     int m = 1;
-
-                    if (highPriorityOperations == false && (digits.Length > 0 && operations.Length > 0))
+            
+                    if (digits.Length > 0 && operations.Length > 0)
                     {
                         foreach (char operation in operations)
                         {
@@ -274,7 +333,13 @@ namespace calc
                             else if (operation == '*')
                             {
                                 secondItem = digits[m];
-                                firstItem = firstItem - secondItem;
+                                firstItem = firstItem * secondItem;
+                                m++;
+                            }
+                            else if (operation == '/')
+                            {
+                                secondItem = digits[m];
+                                firstItem = firstItem / secondItem;
                                 m++;
                             }
                         }
@@ -282,7 +347,7 @@ namespace calc
 
                     result = firstItem;
                     displayResult();
-                }
+                
                 
 
                 
