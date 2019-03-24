@@ -213,6 +213,14 @@ namespace calc
                     if (text == "*")
                     {
                         digits[indexDigits - 1] = setUpOperationWithTwoElements("*");
+                        //Need to get index of current text
+                        int changedIndex = Array.IndexOf(textFieldArray, text);
+                        if (!(changedIndex == digits.Length))
+                        {
+                            
+                            textFieldArray[changedIndex+1] = Convert.ToString(setUpOperationWithTwoElements("*"));
+                        }
+                        
                         //indexDigits++;
                         skipNextDigit = true;
                     }
